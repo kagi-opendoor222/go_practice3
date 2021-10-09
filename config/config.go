@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 
+	"github.com/kagi-opendoor222/go_practice3/utils"
 	"gopkg.in/ini.v1"
 )
 
@@ -17,6 +18,7 @@ var Config ConfigList
 
 func init() {
 	LoadConfig()
+	utils.LoggingSettings(Config.Logfile)
 }
 
 func LoadConfig() {
@@ -27,8 +29,8 @@ func LoadConfig() {
 
 	Config = ConfigList{
 		Port:      cfg.Section("web").Key("name").MustString("8080"),
-		SQLDriver: cfg.Section("web").Key("logfile").String(),
-		DbName:    cfg.Section("db").Key("driver").String(),
-		Logfile:   cfg.Section("db").Key("name").String(),
+		Logfile:   cfg.Section("web").Key("logfile").String(),
+		SQLDriver: cfg.Section("db").Key("driver").String(),
+		DbName:    cfg.Section("db").Key("name").String(),
 	}
 }
